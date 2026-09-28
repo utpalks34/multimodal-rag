@@ -1,0 +1,1045 @@
+{
+  "_readme": "DRAFT candidates. Every entry has verified=false. Open each PDF, confirm the answer and page (page numbers for the two slide decks were counted from slide order; the Kohli report uses its printed page footers), then set verified=true. run_eval must ignore verified=false. Answers must match WHAT THE DOCUMENT SAYS, not real-world truth: never 'correct' an expected_answer from memory or the web. expected_answer 'REFUSAL' means the exact refusal string is correct. relevant = any listed (doc,page) counts as a retrieval hit. types: text | table | chart | multi | image | unanswerable.",
+  "questions": [
+    {
+      "id": "t01",
+      "type": "text",
+      "question": "How does GraphRAG differ from traditional RAG?",
+      "expected_answer": "Traditional RAG relies only on text similarity to find separate chunks; GraphRAG organizes information into nodes (entities) and edges (relationships) so the AI can follow connections across data points to answer multi-step questions.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 1
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["text similarity", "edges"]
+    },
+    {
+      "id": "t02",
+      "type": "text",
+      "question": "What is Neo4j?",
+      "expected_answer": "A native graph database designed to store, manage and query highly connected data using nodes, relationships and properties.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 4
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["native graph database"]
+    },
+    {
+      "id": "t03",
+      "type": "text",
+      "question": "What does the Cypher MATCH clause do?",
+      "expected_answer": "It finds a graph pattern, for example MATCH (m:Movie) RETURN m.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 6
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "t04",
+      "type": "text",
+      "question": "Which nodes are extracted from the Inception chunk in Step 2?",
+      "expected_answer": "Movie Inception (released 2010), Person Christopher Nolan, Person Leonardo DiCaprio, Genre Sci-Fi.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 9
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "t05",
+      "type": "text",
+      "question": "Why should documents be chunked before graph extraction?",
+      "expected_answer": "Smaller context, easier extraction, and better retrieval later.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 8
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "t06",
+      "type": "text",
+      "question": "What are the four steps of the query/answer phase of the complete GraphRAG pipeline?",
+      "expected_answer": "Question, Text to Cypher (LLM generates query), Graph retrieval (Neo4j traverses links), Answer (LLM uses graph context).",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 14
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "b01",
+      "type": "table",
+      "question": "According to the traditional table view, which actor is listed for Interstellar?",
+      "expected_answer": "Matthew McConaughey.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 3
+        }
+      ],
+      "verified": false,
+      "note": "Tiny 2-row table: smoke test only, NOT a real Phase 2 gate. Get a document with real tables."
+    },
+    {
+      "id": "b02",
+      "type": "table",
+      "question": "Which director appears in both rows of the traditional table view?",
+      "expected_answer": "Christopher Nolan.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 3
+        }
+      ],
+      "verified": false,
+      "note": "Same caveat as b01."
+    },
+    {
+      "id": "i01",
+      "type": "image",
+      "question": "What are the five Neo4j concepts you need to know?",
+      "expected_answer": "Node, Label, Property, Relationship, Direction.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 5
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Node", "Label", "Property", "Relationship", "Direction"]
+    },
+    {
+      "id": "i02",
+      "type": "image",
+      "question": "In the Neo4j movie graph, which actors are shown acting in Inception?",
+      "expected_answer": "Leonardo DiCaprio and Joseph Gordon-Levitt.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 11
+        }
+      ],
+      "verified": true,
+      "note": "Gordon-Levitt appears only in the graph image, not in any text on the slides.",
+      "gold_terms": ["Levitt"]
+    },
+    {
+      "id": "i03",
+      "type": "image",
+      "question": "In the Neo4j movie graph, which movie has the genre Action?",
+      "expected_answer": "The Dark Knight (2008).",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 11
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "i04",
+      "type": "image",
+      "question": "What are the three node labels in the graph schema?",
+      "expected_answer": "Person, Movie, Genre.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 10
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "i05",
+      "type": "image",
+      "question": "In GraphRAG retrieval, what does the LLM do at step 4?",
+      "expected_answer": "It generates a Cypher query based on the user question and the graph schema.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 13
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Generate Cypher"]
+    },
+    {
+      "id": "i06",
+      "type": "image",
+      "question": "What are the components of the Simple RAG flow shown in the diagram?",
+      "expected_answer": "Structured and unstructured data become chunks, which are embedded into a vector DB (text embedding model), retrieved as chunks, then an LLM does response generation.",
+      "relevant": [
+        {
+          "doc": "GraphRAG_Neo4j_DSwithBappy_pptx.pdf",
+          "page": 2
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "i07",
+      "type": "image",
+      "question": "What are the core components of an AI agent?",
+      "expected_answer": "Reasoning (core LLM engine), Planning, Memory, Perception (input layer), Action (execution layer).",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 4
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Reasoning", "Planning", "Memory", "Perception", "Action"]
+    },
+    {
+      "id": "i08",
+      "type": "image",
+      "question": "What are the four types of agent memory?",
+      "expected_answer": "Short-term, long-term, working and episodic memory.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 6
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Short-term", "Long-term", "Working", "Episodic"]
+    },
+    {
+      "id": "i09",
+      "type": "image",
+      "question": "What example is given for a reactive agent?",
+      "expected_answer": "A thermostat that turns on the AC the moment it hits 25 degrees C.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 7
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "i10",
+      "type": "image",
+      "question": "Which agentic framework is best for role-based collaboration between specialised agents?",
+      "expected_answer": "CrewAI.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 9
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "i11",
+      "type": "image",
+      "question": "What are the five layers of the guardrail architecture?",
+      "expected_answer": "Input rails, dialog rails, retrieval rails, execution rails (kill-switch), output rails.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 14
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Input Rails", "Dialog Rails", "Retrieval Rails", "Execution Rails", "Output Rails"]
+    },
+    {
+      "id": "i12",
+      "type": "image",
+      "question": "What are the five cost optimization techniques for cutting an $8,000/month agent bill?",
+      "expected_answer": "Model tiering, semantic caching, optimize workflows, batch processing, monitor and limit.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 16
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Model Tiering", "Semantic Caching", "Batch Processing"]
+    },
+    {
+      "id": "i13",
+      "type": "image",
+      "question": "What is Denial of Wallet?",
+      "expected_answer": "Infinite loops causing uncontrolled API calls and high financial cost.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 19
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Denial of Wallet"]
+    },
+    {
+      "id": "i14",
+      "type": "image",
+      "question": "What are the five steps of the error handling workflow for autonomous agents?",
+      "expected_answer": "Validation, detection, action formulation, logging, human-in-the-loop.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 15
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "i15",
+      "type": "image",
+      "question": "What three things does RAG enable an AI agent to do?",
+      "expected_answer": "Access external or private data, reduce dependence on static training knowledge, generate responses grounded in real information.",
+      "relevant": [
+        {
+          "doc": "Agentic_AI_Interview_Preparation_in_2026__1_.pdf",
+          "page": 11
+        }
+      ],
+      "verified": false,
+      "note": "Distractor test: the GraphRAG deck also discusses RAG. Correct page is the agentic deck."
+    },
+    {
+      "id": "u01",
+      "type": "unanswerable",
+      "question": "How much does Neo4j Aura cost per month?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": false
+    },
+    {
+      "id": "u02",
+      "type": "unanswerable",
+      "question": "Which framework does the agentic AI deck recommend for building voice assistants?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": true
+    },
+    {
+      "id": "u03",
+      "type": "unanswerable",
+      "question": "Who is the CEO of Neo4j?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": false
+    },
+    {
+      "id": "u04",
+      "type": "unanswerable",
+      "question": "What GPU is required to run the GraphRAG demo?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": true
+    },
+    {
+      "id": "u05",
+      "type": "unanswerable",
+      "question": "How many GitHub stars does CrewAI have?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": false
+    },
+    {
+      "id": "k_t01",
+      "type": "text",
+      "question": "According to the report, who trained Kohli in Delhi's domestic circuit?",
+      "expected_answer": "Rajkumar Sharma.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 2
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["Rajkumar Sharma"]
+    },
+    {
+      "id": "k_t02",
+      "type": "text",
+      "question": "Against which team, and in which tournament, did Kohli score his only T20I century?",
+      "expected_answer": "Afghanistan, in the Asia Cup 2022 (122*).",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 7
+        }
+      ],
+      "verified": true
+    },
+    {
+      "id": "k_t03",
+      "type": "text",
+      "question": "Why was Kohli's century in Adelaide in 2012 significant?",
+      "expected_answer": "It was a watershed century that changed the trajectory of his Test career.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 3
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_t04",
+      "type": "text",
+      "question": "Whom did Kohli take over the Test captaincy from, and what culture did he instil?",
+      "expected_answer": "MS Dhoni; a ruthless, fast-bowling-oriented, fitness-driven culture.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 9
+        }
+      ],
+      "verified": true,
+      "gold_terms": ["watershed"]
+    },
+    {
+      "id": "k_t05",
+      "type": "text",
+      "question": "Which IPL franchise did Kohli play for, and in which years did he captain it?",
+      "expected_answer": "Royal Challengers Bangalore (RCB); captain from 2013 to 2021.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 8
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_t06",
+      "type": "text",
+      "question": "Which ICC award did Kohli win in 2018 for Test cricket?",
+      "expected_answer": "ICC Test Player of the Year (2018).",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 11
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_t07",
+      "type": "text",
+      "question": "According to the report, what is Kohli's ODI average in successful run-chases?",
+      "expected_answer": "It skyrockets past 85.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 5
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b01",
+      "type": "table",
+      "question": "How many runs did Kohli score in home Tests?",
+      "expected_answer": "4,332.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 3
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "Home Tests",
+        "4332"
+      ]
+    },
+    {
+      "id": "k_b02",
+      "type": "table",
+      "question": "What is Kohli's Test batting average in away Tests?",
+      "expected_answer": "42.68.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 3
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b03",
+      "type": "table",
+      "question": "How many neutral-venue Tests did Kohli play, and what was his average there?",
+      "expected_answer": "2 Tests, average 26.00.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 3
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b04",
+      "type": "table",
+      "question": "What is Kohli's ODI strike rate when batting second (chasing)?",
+      "expected_answer": "94.15.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 5
+        }
+      ],
+      "verified": true,
+      "note": "Strike rate by batting position appears only in the table.",
+      "gold_terms": [
+        "Batting Second",
+        "94.15"
+      ]
+    },
+    {
+      "id": "k_b05",
+      "type": "table",
+      "question": "How many ODI fifties did Kohli score batting first?",
+      "expected_answer": "28.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 5
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b06",
+      "type": "table",
+      "question": "How many ODIs did Kohli captain India in, and how many did India win?",
+      "expected_answer": "95 matches; 65 wins.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 9
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "One Day Internationals",
+        "95",
+        "65"
+      ]
+    },
+    {
+      "id": "k_b07",
+      "type": "table",
+      "question": "What was India's Test win percentage under Kohli's captaincy?",
+      "expected_answer": "58.82%.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 9
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b08",
+      "type": "table",
+      "question": "How many T20I matches did India lose under Kohli's captaincy?",
+      "expected_answer": "16.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 9
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b09",
+      "type": "table",
+      "question": "How many ODI centuries did Kohli score at neutral venues?",
+      "expected_answer": "5.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 10
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b10",
+      "type": "table",
+      "question": "How many Test centuries did Kohli score in away (opposition territory) matches?",
+      "expected_answer": "15.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 10
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b11",
+      "type": "table",
+      "question": "What are Kohli's IPL batting average and strike rate for 2008-2024?",
+      "expected_answer": "Average 37.24, strike rate 130.02.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 8
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b12",
+      "type": "table",
+      "question": "How many fifties has Kohli scored in T20 Internationals?",
+      "expected_answer": "37.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 7
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b13",
+      "type": "table",
+      "question": "When did Kohli score his maiden ODI century, against whom, and what was the score?",
+      "expected_answer": "2009, against Sri Lanka at Eden Gardens, Kolkata; 107.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 2
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_b14",
+      "type": "table",
+      "question": "What is Kohli's highest score in Test cricket according to the report?",
+      "expected_answer": "254*.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 3
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_c01",
+      "type": "chart",
+      "question": "How many Test runs did Kohli score in 2018?",
+      "expected_answer": "1,322.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 4
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "2018",
+        "1322"
+      ]
+    },
+    {
+      "id": "k_c02",
+      "type": "chart",
+      "question": "In which year from 2014 to 2019 did Kohli score the fewest Test runs, and how many?",
+      "expected_answer": "2019, with 612 runs.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 4
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "2019",
+        "612"
+      ]
+    },
+    {
+      "id": "k_c03",
+      "type": "chart",
+      "question": "How many Test runs did Kohli score in 2016?",
+      "expected_answer": "1,215.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 4
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "2016",
+        "1215"
+      ]
+    },
+    {
+      "id": "k_c04",
+      "type": "chart",
+      "question": "Against which opponent has Kohli scored the most ODI centuries in the chart, and how many?",
+      "expected_answer": "Sri Lanka, with 10.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 6
+        }
+      ],
+      "verified": true,
+      "note": "Sri Lanka's lead appears only in the chart, not in the prose.",
+      "gold_terms": [
+        "Sri Lanka",
+        "10"
+      ]
+    },
+    {
+      "id": "k_c05",
+      "type": "chart",
+      "question": "How many ODI centuries has Kohli scored against South Africa?",
+      "expected_answer": "5.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 6
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "South Africa",
+        "5"
+      ]
+    },
+    {
+      "id": "k_c06",
+      "type": "chart",
+      "question": "How many ODI centuries has Kohli scored against New Zealand?",
+      "expected_answer": "6.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 6
+        }
+      ],
+      "verified": true,
+      "gold_terms": [
+        "New Zealand",
+        "6"
+      ]
+    },
+    {
+      "id": "k_m01",
+      "type": "multi",
+      "question": "Is Kohli's ODI average higher batting first or chasing, and what are the two figures?",
+      "expected_answer": "Chasing: 64.21, versus 50.18 batting first.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 5
+        }
+      ],
+      "verified": true
+    },
+    {
+      "id": "k_m02",
+      "type": "multi",
+      "question": "Which of 2016, 2017 and 2018 was Kohli's best year for Test runs?",
+      "expected_answer": "2018 (1,322), ahead of 2016 (1,215) and 2017 (1,059).",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 4
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_m03",
+      "type": "multi",
+      "question": "How many international centuries does Kohli have in total, and how do they split by format?",
+      "expected_answer": "80: 29 Tests, 50 ODIs, 1 T20I.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 10
+        }
+      ],
+      "verified": false
+    },
+    {
+      "id": "k_m04",
+      "type": "multi",
+      "question": "How many more ODI centuries did Kohli score chasing than batting first?",
+      "expected_answer": "27 chasing versus 23 batting first, so 4 more.",
+      "relevant": [
+        {
+          "doc": "Virat_Kohli_Career_Retrospective.pdf",
+          "page": 5
+        }
+      ],
+      "verified": false,
+      "note": "Requires subtraction. prompts.md forbids computing numbers, so the model may only quote 27 and 23. Score as correct if both figures are cited."
+    },
+    {
+      "id": "k_u01",
+      "type": "unanswerable",
+      "question": "How many Test runs did Kohli score in 2020?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": true,
+      "note": "The chart covers 2014-2019 only."
+    },
+    {
+      "id": "k_u02",
+      "type": "unanswerable",
+      "question": "How many international wickets has Kohli taken?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": false,
+      "note": "Only his bowling style is mentioned."
+    },
+    {
+      "id": "k_u03",
+      "type": "unanswerable",
+      "question": "What is Kohli's net worth according to Forbes?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": false,
+      "note": "The report mentions a Forbes ranking but gives no figure."
+    },
+    {
+      "id": "k_u04",
+      "type": "unanswerable",
+      "question": "What is Kohli's highest score in ODI cricket?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": true,
+      "note": "The ODI table has no highest-score column. Parametric-knowledge trap: the model may know this from training. Correct behaviour is still to refuse."
+    },
+    {
+      "id": "k_u05",
+      "type": "unanswerable",
+      "question": "In which year did RCB win the IPL title?",
+      "expected_answer": "REFUSAL",
+      "relevant": [],
+      "verified": false,
+      "note": "The report says only that Kohli dragged RCB to the final in 2016. Parametric-knowledge trap."
+    }
+  ],
+  "table_cell_ground_truth": [
+    {
+      "id": "tc_kohli_t1",
+      "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:t0",
+      "expected_cells": [
+        "Format",
+        "Matches",
+        "Innings",
+        "Runs",
+        "Highest Score",
+        "Average",
+        "100s",
+        "50s",
+        "Home Tests",
+        "53",
+        "83",
+        "4,332",
+        "254*",
+        "58.54",
+        "14",
+        "13",
+        "Away Tests",
+        "60",
+        "106",
+        "4,482",
+        "169",
+        "42.68",
+        "15",
+        "17",
+        "Neutral Tests",
+        "2",
+        "4",
+        "104",
+        "44",
+        "26.00",
+        "0",
+        "0",
+        "Total Test Match",
+        "115",
+        "193",
+        "8,918",
+        "254*",
+        "48.99",
+        "29",
+        "30"
+      ],
+      "table": "Table 1: Test Match Batting Statistics"
+    },
+    {
+      "id": "tc_kohli_t2",
+      "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:t0",
+      "expected_cells": [
+        "Parameter",
+        "Matches",
+        "Innings",
+        "Runs",
+        "Average",
+        "Strike Rate",
+        "100s",
+        "50s",
+        "Batting First",
+        "128",
+        "124",
+        "5,821",
+        "50.18",
+        "92.45",
+        "23",
+        "28",
+        "Batting Second (Chasing)",
+        "164",
+        "156",
+        "8,027",
+        "64.21",
+        "94.15",
+        "27",
+        "44",
+        "Career Total",
+        "292",
+        "280",
+        "13,848",
+        "58.67",
+        "93.58",
+        "50",
+        "72"
+      ],
+      "table": "Table 2: ODI Batting Statistics"
+    },
+    {
+      "id": "tc_kohli_t3",
+      "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:t0",
+      "expected_cells": [
+        "Matches",
+        "Innings",
+        "Runs",
+        "Highest Score",
+        "Average",
+        "Strike Rate",
+        "100s",
+        "50s",
+        "117",
+        "109",
+        "4,037",
+        "122*",
+        "51.75",
+        "138.15",
+        "1",
+        "37"
+      ],
+      "table": "Table 3: T20I Batting Statistics"
+    },
+    {
+      "id": "tc_kohli_t4",
+      "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:t0",
+      "expected_cells": [
+        "Seasons",
+        "Matches",
+        "Runs",
+        "Highest Score",
+        "Average",
+        "Strike Rate",
+        "100s",
+        "50s",
+        "2008 - 2024",
+        "237",
+        "7,263",
+        "113",
+        "37.24",
+        "130.02",
+        "7",
+        "50"
+      ],
+      "table": "Table 4: IPL Batting Statistics"
+    },
+    {
+      "id": "tc_kohli_t5",
+      "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:t0",
+      "expected_cells": [
+        "Format",
+        "Matches as Captain",
+        "Won",
+        "Lost",
+        "Tied/Draw/NR",
+        "Win Percentage",
+        "Test Matches",
+        "68",
+        "40",
+        "17",
+        "11",
+        "58.82%",
+        "One Day Internationals",
+        "95",
+        "65",
+        "27",
+        "3",
+        "68.42%",
+        "T20 Internationals",
+        "50",
+        "30",
+        "16",
+        "4",
+        "60.00%"
+      ],
+      "table": "Table 5: International Captaincy Record"
+    },
+    {
+      "id": "tc_kohli_t6",
+      "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:t0",
+      "expected_cells": [
+        "Venue / Condition",
+        "Test Centuries",
+        "ODI Centuries",
+        "T20I Centuries",
+        "Total",
+        "Home (India)",
+        "14",
+        "22",
+        "0",
+        "36",
+        "Away (Opposition territory)",
+        "15",
+        "23",
+        "0",
+        "38",
+        "Neutral Venues",
+        "0",
+        "5",
+        "1",
+        "6",
+        "Grand Total",
+        "29",
+        "50",
+        "1",
+        "80"
+      ],
+      "table": "Table 6: Distribution of International Centuries"
+    }
+  ]
+}

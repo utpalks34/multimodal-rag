@@ -1,0 +1,539 @@
+{
+  "_note": "Recorded before any pipeline change. Steps 2-4 of the read-only retrieval diagnostic, for the 4 chart questions (k_c02, k_c03, k_c05, k_c06) verified after eval/results_baseline_v0/'s original 11-question baseline was captured (see manifest.json's warning). No retrieval, chunking, prompts, or model code was changed to produce this file -- retrieve()/embed_query() called as-is.",
+  "collection_size": 23,
+  "embedding_model": "nomic-embed-text",
+  "retriever_filter_dedupe_modality": "retrieval/retriever.py.retrieve() -> index/vector_store.py.search(): applies a Qdrant 'doc' MatchAny filter ONLY when document_scope is passed (eval always passes None, so no filter is applied here); no per-page dedupe of any kind; 'modality' is stored as a plain payload field and is never read by search() or retrieve() -- it does not filter, boost, or route the query in any way. All modalities compete in one ranked list.",
+  "questions": [
+    {
+      "id": "k_c02",
+      "type": "chart",
+      "question": "In which year from 2014 to 2019 did Kohli score the fewest Test runs, and how many?",
+      "expected_answer": "2019, with 612 runs.",
+      "expected_numbers": [
+        "2019",
+        "612"
+      ],
+      "top1_chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:c0",
+      "top1_score": 0.83720595,
+      "gold_chunk": "NONE (no chunk among all 23 contains every expected number)",
+      "gold_rank": null,
+      "gold_score": null,
+      "full_ranking": [
+        {
+          "rank": 1,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:c0",
+          "score": 0.83720595
+        },
+        {
+          "rank": 2,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:c0",
+          "score": 0.8079631
+        },
+        {
+          "rank": 3,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:c0",
+          "score": 0.79762477
+        },
+        {
+          "rank": 4,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:c0",
+          "score": 0.7949507
+        },
+        {
+          "rank": 5,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:c0",
+          "score": 0.7809671
+        },
+        {
+          "rank": 6,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:c0",
+          "score": 0.76653147
+        },
+        {
+          "rank": 7,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p12:c0",
+          "score": 0.7552389
+        },
+        {
+          "rank": 8,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p1:c0",
+          "score": 0.7544826
+        },
+        {
+          "rank": 9,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:c0",
+          "score": 0.73292124
+        },
+        {
+          "rank": 10,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:c0",
+          "score": 0.72953486
+        },
+        {
+          "rank": 11,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:c0",
+          "score": 0.7281034
+        },
+        {
+          "rank": 12,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:i0",
+          "score": 0.7009689
+        },
+        {
+          "rank": 13,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:c0",
+          "score": 0.6991502
+        },
+        {
+          "rank": 14,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:t0",
+          "score": 0.68847144
+        },
+        {
+          "rank": 15,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:t0",
+          "score": 0.6863117
+        },
+        {
+          "rank": 16,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:t0",
+          "score": 0.67765355
+        },
+        {
+          "rank": 17,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:t0",
+          "score": 0.6758168
+        },
+        {
+          "rank": 18,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:i0",
+          "score": 0.6645903
+        },
+        {
+          "rank": 19,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:t0",
+          "score": 0.6391437
+        },
+        {
+          "rank": 20,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:t0",
+          "score": 0.63241655
+        },
+        {
+          "rank": 21,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:t0",
+          "score": 0.62738264
+        },
+        {
+          "rank": 22,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:t0",
+          "score": 0.59982264
+        },
+        {
+          "rank": 23,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:i0",
+          "score": 0.59597784
+        }
+      ]
+    },
+    {
+      "id": "k_c03",
+      "type": "chart",
+      "question": "How many Test runs did Kohli score in 2016?",
+      "expected_answer": "1,215.",
+      "expected_numbers": [
+        "1215"
+      ],
+      "top1_chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:c0",
+      "top1_score": 0.8052842,
+      "gold_chunk": "NONE (no chunk among all 23 contains every expected number)",
+      "gold_rank": null,
+      "gold_score": null,
+      "full_ranking": [
+        {
+          "rank": 1,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:c0",
+          "score": 0.8052842
+        },
+        {
+          "rank": 2,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:c0",
+          "score": 0.78284985
+        },
+        {
+          "rank": 3,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:c0",
+          "score": 0.77429104
+        },
+        {
+          "rank": 4,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:c0",
+          "score": 0.7597362
+        },
+        {
+          "rank": 5,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p12:c0",
+          "score": 0.7542666
+        },
+        {
+          "rank": 6,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:c0",
+          "score": 0.7496639
+        },
+        {
+          "rank": 7,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:c0",
+          "score": 0.73519146
+        },
+        {
+          "rank": 8,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p1:c0",
+          "score": 0.7247096
+        },
+        {
+          "rank": 9,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:c0",
+          "score": 0.70173115
+        },
+        {
+          "rank": 10,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:c0",
+          "score": 0.6908658
+        },
+        {
+          "rank": 11,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:c0",
+          "score": 0.689729
+        },
+        {
+          "rank": 12,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:i0",
+          "score": 0.65564036
+        },
+        {
+          "rank": 13,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:t0",
+          "score": 0.64693725
+        },
+        {
+          "rank": 14,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:c0",
+          "score": 0.64272463
+        },
+        {
+          "rank": 15,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:t0",
+          "score": 0.63090855
+        },
+        {
+          "rank": 16,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:t0",
+          "score": 0.611007
+        },
+        {
+          "rank": 17,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:t0",
+          "score": 0.59410447
+        },
+        {
+          "rank": 18,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:t0",
+          "score": 0.5934707
+        },
+        {
+          "rank": 19,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:i0",
+          "score": 0.59329355
+        },
+        {
+          "rank": 20,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:t0",
+          "score": 0.5919444
+        },
+        {
+          "rank": 21,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:t0",
+          "score": 0.5811461
+        },
+        {
+          "rank": 22,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:i0",
+          "score": 0.5552416
+        },
+        {
+          "rank": 23,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:t0",
+          "score": 0.5534878
+        }
+      ]
+    },
+    {
+      "id": "k_c05",
+      "type": "chart",
+      "question": "How many ODI centuries has Kohli scored against South Africa?",
+      "expected_answer": "5.",
+      "expected_numbers": [
+        "5"
+      ],
+      "top1_chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:c0",
+      "top1_score": 0.80857384,
+      "gold_chunk_note": "5 chunks matched all expected numbers: ['Virat_Kohli_Career_Retrospective.pdf:p1:c0', 'Virat_Kohli_Career_Retrospective.pdf:p9:c0', 'Virat_Kohli_Career_Retrospective.pdf:p6:i0', 'Virat_Kohli_Career_Retrospective.pdf:p10:t0', 'Virat_Kohli_Career_Retrospective.pdf:p9:t0']",
+      "gold_chunk": "Virat_Kohli_Career_Retrospective.pdf:p1:c0",
+      "gold_rank": 9,
+      "gold_score": 0.7434957,
+      "gold_chunk_on_relevant_page": false,
+      "gold_chunk_caveat": "gold_chunk is on page 1, NOT one of the golden set's relevant pages [6]. Whole-number matching on a short number (e.g. a single digit) collides with unrelated numbers elsewhere in the document (dates, other stats) -- this is almost certainly a false positive, not the real ground-truth chunk. Treat gold_rank/gold_score for this question as unreliable; the true answer likely lives in an image/chart chunk whose moondream caption doesn't contain the number at all (the Phase 3 reliability gap noted in CLAUDE.md).",
+      "full_ranking": [
+        {
+          "rank": 1,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:c0",
+          "score": 0.80857384
+        },
+        {
+          "rank": 2,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:c0",
+          "score": 0.80704975
+        },
+        {
+          "rank": 3,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:c0",
+          "score": 0.80484825
+        },
+        {
+          "rank": 4,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:c0",
+          "score": 0.7836777
+        },
+        {
+          "rank": 5,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:c0",
+          "score": 0.7769735
+        },
+        {
+          "rank": 6,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:c0",
+          "score": 0.7567705
+        },
+        {
+          "rank": 7,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:c0",
+          "score": 0.7530653
+        },
+        {
+          "rank": 8,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p12:c0",
+          "score": 0.74989676
+        },
+        {
+          "rank": 9,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p1:c0",
+          "score": 0.7434957
+        },
+        {
+          "rank": 10,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:c0",
+          "score": 0.7295189
+        },
+        {
+          "rank": 11,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:c0",
+          "score": 0.7239503
+        },
+        {
+          "rank": 12,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:i0",
+          "score": 0.72100085
+        },
+        {
+          "rank": 13,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:t0",
+          "score": 0.7102208
+        },
+        {
+          "rank": 14,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:t0",
+          "score": 0.68318594
+        },
+        {
+          "rank": 15,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:c0",
+          "score": 0.6591632
+        },
+        {
+          "rank": 16,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:i0",
+          "score": 0.6427953
+        },
+        {
+          "rank": 17,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:t0",
+          "score": 0.635616
+        },
+        {
+          "rank": 18,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:t0",
+          "score": 0.6301224
+        },
+        {
+          "rank": 19,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:t0",
+          "score": 0.6033788
+        },
+        {
+          "rank": 20,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:t0",
+          "score": 0.58912134
+        },
+        {
+          "rank": 21,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:t0",
+          "score": 0.5738102
+        },
+        {
+          "rank": 22,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:t0",
+          "score": 0.56465477
+        },
+        {
+          "rank": 23,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:i0",
+          "score": 0.564384
+        }
+      ]
+    },
+    {
+      "id": "k_c06",
+      "type": "chart",
+      "question": "How many ODI centuries has Kohli scored against New Zealand?",
+      "expected_answer": "6.",
+      "expected_numbers": [
+        "6"
+      ],
+      "top1_chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:c0",
+      "top1_score": 0.82044756,
+      "gold_chunk_note": "3 chunks matched all expected numbers: ['Virat_Kohli_Career_Retrospective.pdf:p10:c0', 'Virat_Kohli_Career_Retrospective.pdf:p6:i0', 'Virat_Kohli_Career_Retrospective.pdf:p10:t0']",
+      "gold_chunk": "Virat_Kohli_Career_Retrospective.pdf:p10:c0",
+      "gold_rank": 4,
+      "gold_score": 0.7994944,
+      "gold_chunk_on_relevant_page": false,
+      "gold_chunk_caveat": "gold_chunk is on page 10, NOT one of the golden set's relevant pages [6]. Whole-number matching on a short number (e.g. a single digit) collides with unrelated numbers elsewhere in the document (dates, other stats) -- this is almost certainly a false positive, not the real ground-truth chunk. Treat gold_rank/gold_score for this question as unreliable; the true answer likely lives in an image/chart chunk whose moondream caption doesn't contain the number at all (the Phase 3 reliability gap noted in CLAUDE.md).",
+      "full_ranking": [
+        {
+          "rank": 1,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:c0",
+          "score": 0.82044756
+        },
+        {
+          "rank": 2,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:c0",
+          "score": 0.8170432
+        },
+        {
+          "rank": 3,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:c0",
+          "score": 0.80634564
+        },
+        {
+          "rank": 4,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:c0",
+          "score": 0.7994944
+        },
+        {
+          "rank": 5,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:c0",
+          "score": 0.79768556
+        },
+        {
+          "rank": 6,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:c0",
+          "score": 0.7738826
+        },
+        {
+          "rank": 7,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p12:c0",
+          "score": 0.76342666
+        },
+        {
+          "rank": 8,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p1:c0",
+          "score": 0.7624571
+        },
+        {
+          "rank": 9,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:c0",
+          "score": 0.75623995
+        },
+        {
+          "rank": 10,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:c0",
+          "score": 0.75039047
+        },
+        {
+          "rank": 11,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:c0",
+          "score": 0.73372424
+        },
+        {
+          "rank": 12,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p2:t0",
+          "score": 0.7225562
+        },
+        {
+          "rank": 13,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p6:i0",
+          "score": 0.7042833
+        },
+        {
+          "rank": 14,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p10:t0",
+          "score": 0.6910235
+        },
+        {
+          "rank": 15,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:c0",
+          "score": 0.6753788
+        },
+        {
+          "rank": 16,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p11:t0",
+          "score": 0.64754075
+        },
+        {
+          "rank": 17,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p8:t0",
+          "score": 0.64230806
+        },
+        {
+          "rank": 18,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:t0",
+          "score": 0.626771
+        },
+        {
+          "rank": 19,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p4:i0",
+          "score": 0.62128764
+        },
+        {
+          "rank": 20,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p5:t0",
+          "score": 0.615481
+        },
+        {
+          "rank": 21,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p9:t0",
+          "score": 0.59283173
+        },
+        {
+          "rank": 22,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p3:t0",
+          "score": 0.58307034
+        },
+        {
+          "rank": 23,
+          "chunk_id": "Virat_Kohli_Career_Retrospective.pdf:p7:i0",
+          "score": 0.56510353
+        }
+      ]
+    }
+  ]
+}

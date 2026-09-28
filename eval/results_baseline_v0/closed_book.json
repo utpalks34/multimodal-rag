@@ -1,0 +1,106 @@
+{
+  "label": "closed_book",
+  "model": "hermes3-rag",
+  "system_prompt": "Answer in at most 2 sentences.",
+  "rows": [
+    {
+      "id": "k_t01",
+      "type": "text",
+      "question": "According to the report, who trained Kohli in Delhi's domestic circuit?",
+      "expected_answer": "Rajkumar Sharma.",
+      "answer": "The report states that Rajat Sharma, the then president of the Delhi and District Cricket Association (DDCA), trained Virat Kohli in the Delhi domestic circuit.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_t02",
+      "type": "text",
+      "question": "Against which team, and in which tournament, did Kohli score his only T20I century?",
+      "expected_answer": "Afghanistan, in the Asia Cup 2022 (122*).",
+      "answer": "Kohli scored his only T20I century against the West Indies in the 2016 World T20 tournament.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_t04",
+      "type": "text",
+      "question": "Whom did Kohli take over the Test captaincy from, and what culture did he instil?",
+      "expected_answer": "MS Dhoni; a ruthless, fast-bowling-oriented, fitness-driven culture.",
+      "answer": "Kohli took over the Test captaincy from MS Dhoni in 2014. He instilled a culture of aggressive, positive cricket, emphasizing fitness, discipline, and a never-give-up attitude.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_b01",
+      "type": "table",
+      "question": "How many runs did Kohli score in home Tests?",
+      "expected_answer": "4,332.",
+      "answer": "As of October 2021, Virat Kohli has scored a total of 2,753 runs in home Tests.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_b04",
+      "type": "table",
+      "question": "What is Kohli's ODI strike rate when batting second (chasing)?",
+      "expected_answer": "94.15.",
+      "answer": "As of my last update, Virat Kohli's ODI strike rate when batting second (chasing) is approximately 92. This figure may have changed since then, so it's best to check the most recent statistics.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_b06",
+      "type": "table",
+      "question": "How many ODIs did Kohli captain India in, and how many did India win?",
+      "expected_answer": "95 matches; 65 wins.",
+      "answer": "Virat Kohli captained India in 21 ODIs. India won 15 of those matches under his leadership.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_c01",
+      "type": "chart",
+      "question": "How many Test runs did Kohli score in 2018?",
+      "expected_answer": "1,322.",
+      "answer": "In 2018, Virat Kohli scored 937, 259, 211, 139, 153, 0, 122, 0, 153, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_c04",
+      "type": "chart",
+      "question": "Against which opponent has Kohli scored the most ODI centuries in the chart, and how many?",
+      "expected_answer": "Sri Lanka, with 10.",
+      "answer": "Kohli has scored the most ODI centuries against West Indies, with a total of 8 centuries.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_m01",
+      "type": "multi",
+      "question": "Is Kohli's ODI average higher batting first or chasing, and what are the two figures?",
+      "expected_answer": "Chasing: 64.21, versus 50.18 batting first.",
+      "answer": "Virat Kohli's ODI batting average is higher when batting first than when chasing. His batting average while batting first is 59.84, and when chasing, it is 52.05.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_u01",
+      "type": "unanswerable",
+      "question": "How many Test runs did Kohli score in 2020?",
+      "expected_answer": "REFUSAL",
+      "answer": "Virat Kohli scored 2114 runs in Test matches in the year 2020.",
+      "declined_heuristic": false
+    },
+    {
+      "id": "k_u04",
+      "type": "unanswerable",
+      "question": "What is Kohli's highest score in ODI cricket?",
+      "expected_answer": "REFUSAL",
+      "answer": "Virat Kohli's highest score in One Day International (ODI) cricket is 183 runs, which he scored against West Indies in 2019.",
+      "declined_heuristic": false
+    }
+  ],
+  "expected_numbers_recall_by_type": {
+    "text": 0.0,
+    "table": 0.0,
+    "chart": 0.0,
+    "multi": 0.0
+  },
+  "unanswerable_questions_answered": [
+    "k_u01",
+    "k_u04"
+  ],
+  "unanswerable_questions_total": 2
+}

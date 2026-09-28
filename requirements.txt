@@ -1,0 +1,30 @@
+# Pinned per tools-requirements.md. Phase 0 installs only langfuse + python-dotenv;
+# the rest are pinned now so versions don't drift before their phase starts.
+# Local-model stack (tools-requirements.md): hermes3/moondream/nomic-embed-text run
+# under Ollama, reached over its OpenAI-compatible /v1 endpoint (openai package) for
+# text/embeddings, and its native client (ollama package) for the moondream vision call.
+docling==2.130.0
+llama-index-core==0.14.25
+qdrant-client==1.19.1
+ollama==0.6.1
+ragas==0.4.3
+# ragas 0.4.3 unpins its langchain family deps; pip resolves the newest releases by
+# default, which no longer match the module layout ragas's code imports (langchain
+# 1.x removed langchain_community.chat_models.vertexai and renamed exceptions ragas
+# needs). Pin the pre-1.0 line ragas 0.4.3 was actually built against.
+langchain==0.3.27
+langchain-community==0.3.27
+langchain-openai==0.3.35
+langchain-core==0.3.86
+openai==1.109.1
+# eval/run_eval.py's ragas judge talks to Ollama's OpenAI-compatible endpoint directly:
+# ragas 0.4.3's provider="groq"/"ollama" paths are broken (reference instructor features
+# no released instructor version has), so it needs a real openai.AsyncOpenAI instance.
+instructor==1.3.2
+langfuse==4.15.6
+sentry-sdk==2.70.0
+python-dotenv==1.2.3
+fastapi==0.141.1
+uvicorn==0.54.0
+streamlit==1.51.0
+requests==2.32.5

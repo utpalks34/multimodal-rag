@@ -1,0 +1,113 @@
+{
+  "per_question": {
+    "k_t01": {
+      "invalid_citations": [],
+      "cited": true,
+      "is_refusal": false,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": null
+    },
+    "k_t02": {
+      "invalid_citations": [],
+      "cited": true,
+      "is_refusal": false,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": ["2022", "122"],
+      "expected_numbers_recall": 1.0
+    },
+    "k_t04": {
+      "invalid_citations": [],
+      "cited": true,
+      "is_refusal": false,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": null
+    },
+    "k_b01": {
+      "invalid_citations": [],
+      "cited": false,
+      "is_refusal": true,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": 0.0
+    },
+    "k_b04": {
+      "invalid_citations": [],
+      "cited": false,
+      "is_refusal": false,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": 0.0
+    },
+    "k_b06": {
+      "invalid_citations": [],
+      "cited": false,
+      "is_refusal": true,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": 0.0
+    },
+    "k_c01": {
+      "invalid_citations": [],
+      "cited": false,
+      "is_refusal": true,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": 0.0
+    },
+    "k_c04": {
+      "invalid_citations": [],
+      "cited": true,
+      "is_refusal": false,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": [],
+      "expected_numbers_recall": 0.0
+    },
+    "k_m01": {
+      "invalid_citations": [],
+      "cited": true,
+      "is_refusal": false,
+      "ungrounded_numbers": [],
+      "expected_numbers_in_context": ["64.21", "50.18"],
+      "expected_numbers_recall": 1.0
+    },
+    "k_u01": {
+      "invalid_citations": [],
+      "cited": false,
+      "is_refusal": true,
+      "ungrounded_numbers": []
+    },
+    "k_u04": {
+      "invalid_citations": [],
+      "cited": true,
+      "is_refusal": false,
+      "ungrounded_numbers": [
+        "124"
+      ]
+    }
+  },
+  "table_cell_f1_per_entry": {
+    "tc_kohli_t1": 1.0,
+    "tc_kohli_t2": 1.0,
+    "tc_kohli_t3": 1.0,
+    "tc_kohli_t4": 1.0,
+    "tc_kohli_t5": 1.0,
+    "tc_kohli_t6": 1.0
+  },
+  "summary": {
+    "invalid_citation_rate": 0.0,
+    "uncited_answer_rate": 0.09090909090909091,
+    "ungrounded_number_rate": 0.09090909090909091,
+    "refusal_rate_answerable": 0.3333333333333333,
+    "refusal_rate_unanswerable": 0.5,
+    "table_cell_f1": 1.0,
+    "expected_numbers_recall_by_type": {
+      "text": 1.0,
+      "table": 0.0,
+      "chart": 0.0,
+      "multi": 1.0
+    },
+    "_expected_numbers_recall_by_type_note": "Added offline (not re-run from generation) via eval.run_eval.expected_numbers_recall against the chunks already saved in retrieval.json. 'unanswerable' has no entry -- both its questions have expected_answer=REFUSAL, which has no numbers, so they're skipped per spec. table=0.0 and chart=0.0 have the same root cause as the k_b01/k_b04/k_b06/k_c01/k_c04 refusals/wrong-answers in per_question.md: the specific table/image chunk holding the ground-truth number was not among the 10 retrieved chunks for any of those 5 questions, even though the page itself counted as a Recall@10 hit via a co-located text chunk. This is a distinct failure from table_cell_f1=1.0 above, which only checks that already-retrieved table chunks parse correctly -- it says nothing about whether the right table chunk gets retrieved in the first place."
+  }
+}
