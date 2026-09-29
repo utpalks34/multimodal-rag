@@ -1,8 +1,8 @@
-# Multimodal RAG (text + tables + images, voice output planned)
+# Multimodal RAG (text + tables + images)
 
 Retrieval-augmented Q&A over PDFs (slide decks, reports) that mixes prose, tables, and
 charts/images. Pipeline: **parse -> caption -> chunk -> embed -> index -> retrieve ->
-rerank -> generate -> TTS**. Local models only (Ollama), traced end-to-end with Langfuse.
+rerank -> generate**. Local models only (Ollama), traced end-to-end with Langfuse.
 
 ## Status
 
@@ -12,7 +12,6 @@ rerank -> generate -> TTS**. Local models only (Ollama), traced end-to-end with 
 | Table extraction (cell-level)      | 2 | done |
 | Image/chart captioning (moondream) | 3 | done |
 | Rerank                             | 4 | stub (`retrieval/reranker.py` — pass-through) |
-| TTS                                | 5 | stub (`voice/tts.py` — not implemented) |
 
 The dev-loop eval (`python -m eval.run_eval`, no `--gate`, 27 verified golden questions)
 currently shows text/table/image retrieval solid (MRR 0.83–0.91, table cell F1 1.0) but
@@ -34,7 +33,6 @@ retrieval/reranker.py   Phase 4 stub
 generation/generator.py hermes3-rag (custom Modelfile) — answers only from retrieved chunks,
                          cites chunk ids like [C2], refuses when the context doesn't contain
                          the answer
-voice/tts.py            Phase 5 stub
 observability/tracing.py Langfuse span helper wired through every stage
 api/main.py              FastAPI: POST /query; offline ingestion via `python -m api.main *.pdf`
 demo/app.py               Streamlit client that only calls the FastAPI /query endpoint
@@ -63,8 +61,8 @@ Copy `.env` and fill in (see `Modelfile`/module docstrings for defaults):
   `VLM_MODEL` (default `moondream`), `JUDGE_MODEL` (for `eval/run_eval.py --gate`)
 - `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` / `LANGFUSE_HOST`
 
-`COHERE_API_KEY`, `CARTESIA_API_KEY`, `SENTRY_DSN`, `Groq_API_KEY` are reserved for later
-phases (rerank / TTS / error tracking / alternate judge) and aren't read by any module yet.
+`COHERE_API_KEY`, `SENTRY_DSN`, `Groq_API_KEY` are reserved for later phases (rerank /
+error tracking / alternate judge) and aren't read by any module yet.
 
 ## Usage
 

@@ -1,4 +1,4 @@
-"""FastAPI app wiring the pipeline together: POST /query {query, document_scope?} -> {text_answer, citations, audio_url, trace_id}; sets degraded=true if TTS fails. (Phase 1 text-only, complete by Phase 5)
+"""FastAPI app wiring the pipeline together: POST /query {query, document_scope?} -> {text_answer, citations, trace_id}.
 
 Ingestion is offline: python -m api.main <file.pdf> [...]
 """
@@ -46,8 +46,6 @@ class QueryResponse(BaseModel):
     citations: list[Citation]
     chunks: list[RetrievedChunk]
     trace_id: str
-    audio_url: str | None = None  # no TTS until Phase 5
-    degraded: bool | None = None  # set by the TTS stage in Phase 5
 
 
 @app.post("/query", response_model=QueryResponse, response_model_exclude_none=True)

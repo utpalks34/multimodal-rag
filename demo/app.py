@@ -38,61 +38,51 @@ if "query" not in st.session_state:
 
 query = st.text_input("Question", value=st.session_state.query)
 
-cols = st.columns(3)
+sample_cols = st.columns(len(SAMPLE_QUESTIONS))
 for i, q in enumerate(SAMPLE_QUESTIONS):
-    if cols[i % 3].button(q, key=f"sample_{i}"):
+    if sample_cols[i].button(q, key=f"sample_{i}"):
         st.session_state.query = q
         st.rerun()
 
 if st.button("Ask") and query:
-    # Cosmetic only: mirrors the query-time pipeline order from CLAUDE.md, does not
-    # measure real per-stage timing (the API returns one response for the whole call).
-    with st.status("Running pipeline...", expanded=True) as status:
-        start = time.time()
-        st.write("🔎 Retrieve — embedding query, searching Qdrant...")
-        time.sleep(0.3)
-        st.write("↕️ Rerank — Phase 4 stub, pass-through")
-        time.sleep(0.15)
-        st.write("✍️ Generate — hermes3-rag via Ollama...")
+    start = time.time()
+    with st.spinner("Processing..."):
         try:
             resp = requests.post(API_URL, json={"query": query}, timeout=300)
             resp.raise_for_status()
             data = resp.json()
             elapsed = time.time() - start
         except requests.RequestException as e:
-            status.update(label="Pipeline failed", state="error")
             st.error(f"Could not reach the API at {API_URL}: {e}")
+            data = None
+
+    if data is not None:
+        with st.expander("Raw response"):
+            st.json(data)
+
+        answer = data.get("text_answer", "")
+        if answer.strip() == REFUSAL:
+            st.info(answer)
         else:
-            st.write("🔊 TTS — Phase 5 stub, skipped (audio_url unset)")
-            time.sleep(0.15)
-            status.update(label="Pipeline complete", state="complete")
+            st.write(answer)
 
-            with st.expander("Raw response"):
-                st.json(data)
+        st.subheader("Citations")
+        citations = data.get("citations", [])
+        if citations:
+            for c in citations:
+                doc = c.get("doc", "unknown")
+                page = c.get("page", "?")
+                chunk_id = c.get("chunk_id", "?")
+                st.write(f"- {doc} (page {page}, {_modality(c)}) — chunk `{chunk_id}`")
+        else:
+            st.write("None")
 
-            answer = data.get("text_answer", "")
-            if answer.strip() == REFUSAL:
-                st.info(answer)
-            else:
-                st.write(answer)
-
-            st.subheader("Citations")
-            citations = data.get("citations", [])
-            if citations:
-                for c in citations:
-                    doc = c.get("doc", "unknown")
-                    page = c.get("page", "?")
+        chunks = data.get("chunks", [])
+        if chunks:
+            with st.expander("Retrieved chunks"):
+                for c in chunks:
                     chunk_id = c.get("chunk_id", "?")
-                    st.write(f"- {doc} (page {page}, {_modality(c)}) — chunk `{chunk_id}`")
-            else:
-                st.write("None")
+                    st.markdown(f"**{chunk_id}** ({_modality(c)})")
+                    st.text(c.get("text", ""))
 
-            chunks = data.get("chunks", [])
-            if chunks:
-                with st.expander("Retrieved chunks"):
-                    for c in chunks:
-                        chunk_id = c.get("chunk_id", "?")
-                        st.markdown(f"**{chunk_id}** ({_modality(c)})")
-                        st.text(c.get("text", ""))
-
-            st.caption(f"Total latency: {elapsed:.2f}s")
+        st.caption(f"Total latency: {elapsed:.2f}s")

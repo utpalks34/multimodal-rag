@@ -1,9 +1,0 @@
-﻿NAME                       ID              SIZE      MODIFIED    
-hermes3-rag:latest         a66940b4b470    4.7 GB    6 hours ago    
-hermes3:latest             4f6b83f30b62    4.7 GB    2 days ago     
-hermes3:8b                 4f6b83f30b62    4.7 GB    2 days ago     
-moondream:latest           55fc3abd3867    1.7 GB    3 days ago     
-qwen2.5-coder:3b           f72c60cabf62    1.9 GB    3 days ago     
-nomic-embed-text:latest    0a109f422b47    274 MB    3 days ago     
-qwen2.5:1.5b-instruct      65ec06548149    986 MB    3 days ago     
-llama3.2:latest            a80c4f17acd5    2.0 GB    9 days ago     
